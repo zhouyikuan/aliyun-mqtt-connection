@@ -22,17 +22,21 @@ import time
 from paho.mqtt.client import MQTT_LOG_INFO, MQTT_LOG_NOTICE, MQTT_LOG_WARNING, MQTT_LOG_ERR, MQTT_LOG_DEBUG
 from paho.mqtt import client as mqtt
 
-# 
+# Credentials
 instanceId = ''# post-cn-{something}
 accessKey = ''
 secretKey = ''
 groupId = '' #GID_{something}
+
+# Fill as needed
 client_id= groupId + '@@@' # + '{something}
 topic = '' # topic to subscribe to
 
 brokerUrl= instanceId + '.mqtt.aliyuncs.com'
 userName ='Signature'+'|'+accessKey+'|'+instanceId
 password = base64.b64encode(hmac.new(secretKey.encode(), client_id.encode(), sha1).digest()).decode()
+# You can find the expected password on aliyun site
+
 
 def on_log(client, userdata, level, buf):
     if level == MQTT_LOG_INFO:
